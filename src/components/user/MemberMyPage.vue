@@ -82,11 +82,7 @@ export default {
     ...mapState(memberStore, ["userInfo"]),
   },
 
-  methods: {
-    modify(userid) {
-      this.$router.push("/modify/" + userid);
-    },
-  },
+  methods: {},
 };
 </script>
 

@@ -68,7 +68,7 @@ const routes = [
         component: MemberMyPage,
       },
       {
-        path: "modify/:userid",
+        path: "modify",
         name: "Modify",
         beforeEnter: onlyAuthUser,
         component: MemberModify,

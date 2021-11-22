@@ -1,6 +1,6 @@
 import jwt_decode from "jwt-decode";
 import { login } from "@/api/member.js";
-import { findById } from "../../api/member";
+import { findById, modify, remove } from "../../api/member";
 
 const memberStore = {
   namespaced: true,
@@ -51,9 +51,43 @@ const memberStore = {
         (response) => {
           if (response.data.message === "success") {
             commit("SET_USER_INFO", response.data.userInfo);
+            console.log(response.data.userInfo);
           } else {
             console.log("유저 정보 없음!!");
           }
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    },
+    userModify({ commit }, user) {
+      const params = {
+        userid: user.userid,
+        username: user.username,
+        userpwd: user.userpwd,
+        email: user.email,
+      };
+      console.log(params);
+      modify(
+        params,
+        ({ data }) => {
+          console.log(data);
+          commit("SET_USER_INFO", data.userInfo);
+
+          alert("다시 로그인 해주세요.");
+        },
+        (error) => {
+          alert("수정에 실패했습니다.");
+          console.log(error);
+        }
+      );
+    },
+    deleteUser({ commit }, userid) {
+      remove(
+        userid,
+        () => {
+          commit("SET_IS_LOGIN", false);
         },
         (error) => {
           console.log(error);

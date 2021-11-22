@@ -7,7 +7,7 @@
 
       <hr class="my-4" />
 
-      <b-button variant="danger" @click="removeUser" class="mr-1"
+      <b-button variant="danger" @click="deleteInfo" class="mr-1"
         >탈퇴 완료하기</b-button
       >&nbsp;&nbsp;
       <b-button variant="primary" @click="back" class="mr-1">돌아가기</b-button>
@@ -16,8 +16,7 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
-import axios from "axios";
+import { mapActions, mapState, mapMutations } from "vuex";
 
 const memberStore = "memberStore";
 
@@ -32,15 +31,16 @@ export default {
     ...mapState(memberStore, ["userInfo"]),
   },
   methods: {
+    ...mapMutations(memberStore, ["SET_IS_LOGIN", "SET_USER_INFO"]),
+    ...mapActions(memberStore, ["deleteUser"]),
     back() {
       this.$router.push({ name: "MyPage" });
     },
-    removeUser() {
-      alert("삭제 전임");
-      axios.put("http://localhost/remove/" + this.userid).then(() => {
-        alert("삭제 완료!");
-        this.$router.push({ name: "Home" });
-      });
+    deleteInfo() {
+      this.deleteUser(this.userInfo.userid);
+      this.SET_USER_INFO(null);
+      sessionStorage.removeItem("access-token");
+      this.$router.push({ name: "Home" });
     },
   },
 };

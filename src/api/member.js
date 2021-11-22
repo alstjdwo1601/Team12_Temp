@@ -11,6 +11,14 @@ async function findById(userid, success, fail) {
   await api.get(`/user/info/${userid}`).then(success).catch(fail);
 }
 
+async function modify(user, success, fail) {
+  api.put(`/user`, JSON.stringify(user)).then(success).catch(fail);
+}
+
+async function remove(userid, success, fail) {
+  api.delete(`/user/${userid}`).then(success).catch(fail);
+}
+
 // function logout(success, fail)
 
-export { login, findById };
+export { login, findById, modify, remove };

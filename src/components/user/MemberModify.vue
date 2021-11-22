@@ -27,7 +27,7 @@
               <b-col cols="2"></b-col>
               <b-col cols="2" align-self="end">이름: </b-col
               ><b-col cols="4" align-self="start"
-                ><input type="text" v-model="userInfo.username"
+                ><input type="text" v-model="user.username"
               /></b-col>
               <b-col cols="2"></b-col>
             </b-row>
@@ -36,7 +36,7 @@
               <b-col cols="2"></b-col>
               <b-col cols="2" align-self="end">비밀번호: </b-col
               ><b-col cols="4" align-self="start"
-                ><input type="text" v-model="userInfo.userpwd"
+                ><input type="text" v-model="user.userpwd"
               /></b-col>
               <b-col cols="2"></b-col>
             </b-row>
@@ -45,7 +45,7 @@
               <b-col cols="2"></b-col>
               <b-col cols="2" align-self="end">이메일: </b-col
               ><b-col cols="4" align-self="start"
-                ><input type="text" v-model="userInfo.email"
+                ><input type="text" v-model="user.email"
               /></b-col>
               <b-col cols="2"></b-col>
             </b-row>
@@ -76,27 +76,39 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
-import axios from "axios";
+import { mapActions, mapState } from "vuex";
 
 const memberStore = "memberStore";
 
 export default {
   name: "MemberModify",
-  components: {},
+  data() {
+    return {
+      user: {
+        userid: "",
+        username: "",
+        userpwd: "",
+        email: "",
+      },
+    };
+  },
+  mounted() {
+    this.user.userid = this.userInfo.userid;
+    this.user.username = this.userInfo.username;
+    this.user.userpwd = this.userInfo.userpwd;
+    this.user.email = this.userInfo.email;
+  },
   computed: {
     ...mapState(memberStore, ["userInfo"]),
   },
   methods: {
+    ...mapActions(memberStore, ["userModify"]),
     back() {
       this.$router.push({ name: "MyPage" });
     },
     modifyUser() {
-      alert("수정 전임");
-      axios.put("http://localhost/modify/" + this.userid).then(() => {
-        alert("수정 완료!");
-        this.$router.push({ name: "Home" });
-      });
+      this.userModify(this.user);
+      this.$router.push({ name: "Home" });
     },
   },
 };
