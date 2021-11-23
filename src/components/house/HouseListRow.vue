@@ -2,7 +2,7 @@
   <b-row
     class="m-2"
     @click="selectHouse"
-    @mouseover="colorChange(true)"
+    @mouseover="colorChange(true), Overlay"
     @mouseout="colorChange(false)"
     :class="{ 'mouse-over-bgcolor': isColor }"
   >
@@ -14,7 +14,7 @@
       ></b-img>
     </b-col>
     <b-col cols="10" class="align-self-center">
-      [{{ house.일련번호 }}] {{ house.아파트 }}
+      [{{ apt.aptCode }}] {{ apt.aptName }}
     </b-col>
   </b-row>
 </template>
@@ -32,7 +32,7 @@ export default {
     };
   },
   props: {
-    house: Object,
+    apt: Object,
   },
   methods: {
     ...mapActions(houseStore, ["detailHouse"]),
