@@ -96,7 +96,7 @@
 
 <script>
 import BoardListRow from "@/components/board/child/BoardListRow";
-import { listArticle } from "@/api/board.js";
+import { listArticle, getTotal } from "@/api/board.js";
 
 export default {
   name: "BoardList",
@@ -108,7 +108,6 @@ export default {
       articles: [],
       total: 0,
       pg: 1,
-      spp: 15,
 
       word: null,
       key: null,
@@ -129,7 +128,15 @@ export default {
       param,
       (response) => {
         this.articles = response.data;
-        this.total = this.articles.length;
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+    getTotal(
+      ({ data }) => {
+        console.log(data);
+        this.total = data;
       },
       (error) => {
         console.log(error);
@@ -142,7 +149,7 @@ export default {
         listSize = 15,
         page = Math.floor(listLeng / listSize);
       if (listLeng % listSize > 0) page += 1;
-      return page + 1;
+      return page;
     },
   },
   methods: {

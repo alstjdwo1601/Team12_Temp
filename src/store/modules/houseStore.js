@@ -4,6 +4,7 @@ import {
   dongList,
   aptList,
   houseList,
+  getTotal,
 } from "@/api/house.js";
 import { eventBus } from "../../main.js";
 
@@ -14,6 +15,7 @@ const houseStore = {
     guguns: [{ value: null, text: "선택하세요" }],
     dongs: [{ value: null, text: "선택하세요" }],
 
+    total: 0,
     apts: [],
     houses: [],
     house: null,
@@ -36,6 +38,9 @@ const houseStore = {
       dongs.forEach((dong) => {
         state.dongs.push({ value: dong.dongCode, text: dong.dongName });
       });
+    },
+    SET_CNT: (state, total) => {
+      state.total = total;
     },
     CLEAR_SIDO_LIST: (state) => {
       state.sidos = [{ value: null, text: "선택하세요" }];
@@ -109,14 +114,31 @@ const houseStore = {
         }
       );
     },
-    getAptList: ({ commit }, dongCode) => {
+    getAptList: ({ commit }, param) => {
       const params = {
-        dong: dongCode,
+        pg: param.pg,
+        spp: 5,
+        word: param.word,
+        dong: param.dongCode,
       };
       aptList(
         params,
         ({ data }) => {
           commit("SET_APT_LIST", data);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    },
+    cntTotal: ({ commit }, dongCode) => {
+      let params = {
+        dong: dongCode,
+      };
+      getTotal(
+        params,
+        ({ data }) => {
+          commit("SET_CNT", data);
         },
         (error) => {
           console.log(error);

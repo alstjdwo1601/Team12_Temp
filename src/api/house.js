@@ -21,5 +21,8 @@ function aptList(params, success, fail) {
 function houseList(params, success, fail) {
   house.get(``, { params: params }).then(success).catch(fail);
 }
+function getTotal(params, success, fail) {
+  api.get(`/map/total`, { params: params }).then(success).catch(fail);
+}
 
-export { sidoList, gugunList, dongList, aptList, houseList };
+export { sidoList, gugunList, dongList, aptList, houseList, getTotal };

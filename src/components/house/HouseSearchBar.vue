@@ -47,6 +47,7 @@ import { mapState, mapActions, mapMutations } from "vuex";
   }
 */
 const houseStore = "houseStore";
+import { eventBus } from "../../main.js";
 
 export default {
   name: "HouseSearchBar",
@@ -113,15 +114,18 @@ export default {
       this.CLEAR_DONG_LIST();
       if (this.gugunCode) {
         this.getDong(this.gugunCode);
-        this.getHouseList(this.gugunCode);
       }
     },
 
     searchApt() {
       this.CLEAR_APT_LIST();
       if (this.dongCode) {
-        this.CLEAR_HOUSE_LIST();
-        this.getAptList(this.dongCode);
+        let param = {
+          pg: 1,
+          dongCode: this.dongCode,
+          word: null,
+        };
+        eventBus.$emit("aptList", param);
       }
     },
   },
