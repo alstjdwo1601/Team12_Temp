@@ -19,6 +19,10 @@ async function remove(userid, success, fail) {
   api.delete(`/user/${userid}`).then(success).catch(fail);
 }
 
+async function join(params, success, fail) {
+  api.post(`/user/join`, JSON.stringify(params)).then(success).catch(fail);
+}
+
 // function logout(success, fail)
 
-export { login, findById, modify, remove };
+export { login, findById, modify, remove, join };
