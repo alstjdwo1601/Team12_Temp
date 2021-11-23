@@ -31,23 +31,13 @@
         @change="searchApt"
       ></b-form-select>
     </b-col>
-    <b-row class="mb-3">
-      <b-col class="text-right">
-        <b-button variant="outline-danger" style="float: right" @click="reset"
-          >초기화</b-button
-        >
-        <b-button
-          variant="outline-primary"
-          style="float: right"
-          @click="searchPg"
-          >검색</b-button
-        >
-        <b-form-input
-          v-model="word"
-          style="width: 250px; float: right"
-        ></b-form-input>
-      </b-col>
-    </b-row>
+    <b-col class="sm-3">
+      <b-form-input v-model="word"></b-form-input>
+    </b-col>
+    <div class="mt-2" style="padding-top: 3px">
+      <b-button variant="outline-primary" @click="searchPg">검색</b-button>
+      <b-button variant="outline-danger" @click="reset">초기화</b-button>
+    </div>
   </b-row>
 </template>
 

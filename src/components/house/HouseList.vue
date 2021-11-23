@@ -1,5 +1,6 @@
 <template>
   <b-container v-if="apts && apts.length != 0" class="bv-example-row mt-3">
+    <span>관심아파트</span>
     <house-list-row v-for="(apt, index) in apts" :key="index" :apt="apt" />
     <b-button-toolbar
       class="mb-5"
@@ -47,10 +48,11 @@
 
 <script>
 import HouseListRow from "@/components/house/HouseListRow.vue";
-import { mapActions, mapState } from "vuex";
+import { mapActions, mapState, mapMutations } from "vuex";
 import { eventBus } from "../../main.js";
 
 const houseStore = "houseStore";
+const memberStore = "memberStore";
 
 export default {
   name: "HouseList",
@@ -64,6 +66,15 @@ export default {
       word: null,
     };
   },
+  created() {
+    this.CLEAR_CHECKED();
+    if (this.isLogin) {
+      let params = {
+        id: this.userInfo.userid,
+      };
+      this.gAttention(params);
+    }
+  },
   mounted() {
     eventBus.$on("aptList", (data) => {
       this.getAptList(data);
@@ -73,6 +84,7 @@ export default {
     });
   },
   computed: {
+    ...mapState(memberStore, ["isLogin", "userInfo"]),
     ...mapState(houseStore, ["apts", "total"]),
     totalCnt() {
       let listLeng = this.total,
@@ -86,7 +98,8 @@ export default {
     // },
   },
   methods: {
-    ...mapActions(houseStore, ["getAptList", "cntTotal"]),
+    ...mapMutations(houseStore, ["CLEAR_CHECKED"]),
+    ...mapActions(houseStore, ["getAptList", "cntTotal", "gAttention"]),
     firstPg() {
       this.pg = 1;
       this.chagePg(this.pg);

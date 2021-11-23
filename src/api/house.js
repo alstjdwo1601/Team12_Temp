@@ -24,5 +24,23 @@ function houseList(params, success, fail) {
 function getTotal(params, success, fail) {
   api.get(`/map/total`, { params: params }).then(success).catch(fail);
 }
-
-export { sidoList, gugunList, dongList, aptList, houseList, getTotal };
+function setAttention(params, success, fail) {
+  api.get(`/map/set`, { params: params }).then(success).catch(fail);
+}
+function getAttention(params, success, fail) {
+  api.get(`/map/get`, { params: params }).then(success).catch(fail);
+}
+function delAttention(params, success, fail) {
+  api.delete(`/map/del`, { params: params }).then(success).catch(fail);
+}
+export {
+  sidoList,
+  gugunList,
+  dongList,
+  aptList,
+  houseList,
+  getTotal,
+  setAttention,
+  getAttention,
+  delAttention,
+};

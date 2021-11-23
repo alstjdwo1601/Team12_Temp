@@ -5,6 +5,7 @@ import {
   aptList,
   houseList,
   getTotal,
+  getAttention,
 } from "@/api/house.js";
 import { eventBus } from "../../main.js";
 
@@ -19,6 +20,8 @@ const houseStore = {
     apts: [],
     houses: [],
     house: [],
+
+    checked: [],
   },
 
   getters: {},
@@ -70,6 +73,11 @@ const houseStore = {
         },
       ];
     },
+    SET_CHECKED: (state, checks) => {
+      checks.forEach((check) => {
+        state.checked.push(check.aptCode);
+      });
+    },
     CLEAR_APT_LIST: (state) => {
       state.apts = [];
     },
@@ -78,6 +86,9 @@ const houseStore = {
     },
     CLEAR_DETAIL_HOUSE: (state) => {
       state.house = [];
+    },
+    CLEAR_CHECKED: (state) => {
+      state.checked = [];
     },
   },
 
@@ -179,6 +190,17 @@ const houseStore = {
     detailHouse: ({ commit }, apt) => {
       // 나중에 house.일련번호를 이용하여 API 호출
       commit("SET_DETAIL_HOUSE", apt);
+    },
+    gAttention: ({ commit }, param) => {
+      getAttention(
+        param,
+        ({ data }) => {
+          commit("SET_CHECKED", data);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
     },
   },
 };
