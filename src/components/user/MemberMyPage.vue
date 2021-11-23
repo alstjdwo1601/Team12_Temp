@@ -1,73 +1,76 @@
 <template>
-  <b-container class="mt-4" v-if="userInfo">
-    <b-row>
-      <b-col>
-        <b-alert variant="primary" show><h3>내정보</h3></b-alert>
-      </b-col>
-    </b-row>
-    <b-row>
-      <b-col></b-col>
-      <b-col cols="8">
-        <b-jumbotron>
-          <template #header>My Page</template>
+  <div id="min">
+    <!--card 시작-->
+    <hr />
+    <v-card :loading="loading" class="mx-auto my-12" max-width="700">
+      <template slot="progress">
+        <v-progress-linear
+          color="deep-purple"
+          height="10"
+          indeterminate
+        ></v-progress-linear>
+      </template>
 
-          <template #lead> 내 정보 확인페이지입니다. </template>
+      <v-img height="400" src="@/assets/user.png"></v-img>
 
-          <hr class="my-4" />
+      <v-card-title>[{{ userInfo.userid }}] 님 회원정보</v-card-title>
 
-          <b-container class="mt-4">
-            <b-row>
-              <b-col cols="2"></b-col>
-              <b-col cols="2" align-self="end">아이디: </b-col
-              ><b-col cols="4" align-self="start">{{ userInfo.userid }}</b-col>
-              <b-col cols="2"></b-col>
-            </b-row>
-            <b-row>
-              <b-col cols="2"></b-col>
-              <b-col cols="2" align-self="end">이름: </b-col
-              ><b-col cols="4" align-self="start">{{
-                userInfo.username
-              }}</b-col>
-              <b-col cols="2"></b-col>
-            </b-row>
-            <b-row>
-              <b-col cols="2"></b-col>
-              <b-col cols="2" align-self="end">이메일: </b-col
-              ><b-col cols="4" align-self="start">{{ userInfo.email }}</b-col>
-              <b-col cols="2"></b-col>
-            </b-row>
-            <b-row>
-              <b-col cols="2"></b-col>
-              <b-col cols="2" align-self="end">가입일: </b-col
-              ><b-col cols="4" align-self="start">{{
-                userInfo.joindate
-              }}</b-col>
-              <b-col cols="2"></b-col>
-            </b-row>
-          </b-container>
-          <hr class="my-4" />
+      <v-card-text>
+        <v-row align="center" class="mx-0">
+          <v-rating
+            :value="4.5"
+            color="amber"
+            dense
+            half-increments
+            readonly
+            size="14"
+          ></v-rating>
 
-          <b-button variant="warning" class="mr-1"
-            ><router-link
-              :to="{ name: 'Modify' }"
-              class="link align-self-center"
-              >정보수정</router-link
-            ></b-button
-          >
-          &nbsp;&nbsp;
+          <div class="grey--text ms-4">거래 신뢰도 : 4.5</div>
+        </v-row>
+        <br />
+        <br />
+        <v-simple-table dark>
+          <template v-slot:default>
+            <thead>
+              <tr>
+                <th class="text-center">아이디</th>
+                <th class="text-center">이름</th>
+                <th class="text-center">이메일</th>
+                <th class="text-center">가입일</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{{ userInfo.userid }}</td>
+                <td>{{ userInfo.username }}</td>
+                <td>{{ userInfo.email }}</td>
+                <td>{{ userInfo.joindate }}</td>
+              </tr>
+            </tbody>
+          </template>
+        </v-simple-table>
+      </v-card-text>
 
-          <b-button variant="danger" class="mr-1"
-            ><router-link
-              :to="{ name: 'Remove' }"
-              class="link align-self-center"
-              >회원탈퇴</router-link
-            ></b-button
-          >
-        </b-jumbotron>
-      </b-col>
-      <b-col></b-col>
-    </b-row>
-  </b-container>
+      <v-divider class="mx-4"></v-divider>
+
+      <b-button variant="warning" class="mr-1"
+        ><router-link :to="{ name: 'Modify' }" class="link align-self-center"
+          >정보수정</router-link
+        ></b-button
+      >
+      &nbsp;&nbsp;
+
+      <b-button variant="danger" class="mr-1"
+        ><router-link :to="{ name: 'Remove' }" class="link align-self-center"
+          >회원탈퇴</router-link
+        ></b-button
+      >
+      <br />
+      <br />
+    </v-card>
+    <br />
+  </div>
 </template>
 
 <script>
@@ -86,4 +89,49 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.custom-loader {
+  animation: loader 1s infinite;
+  display: flex;
+}
+@-moz-keyframes loader {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+@-webkit-keyframes loader {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+@-o-keyframes loader {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes loader {
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+#min {
+  font-family: "SLEIGothicTTF";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2104@1.0/SLEIGothicTTF.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+</style>
