@@ -18,6 +18,7 @@
           ></b-form-input>
         </b-form-group>
 
+        <br />
         <b-form-group
           id="subject-group"
           label="제목:"
@@ -32,7 +33,7 @@
             placeholder="제목 입력..."
           ></b-form-input>
         </b-form-group>
-
+        <br />
         <b-form-group id="content-group" label="내용:" label-for="content">
           <b-form-textarea
             id="content"

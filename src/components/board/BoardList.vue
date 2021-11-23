@@ -12,6 +12,7 @@
         >
       </b-col>
     </b-row>
+    <hr />
     <b-row>
       <b-col v-if="articles.length">
         <b-table-simple hover responsive>

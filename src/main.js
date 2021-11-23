@@ -8,6 +8,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
 import store from "./store";
 import memberStore from "./store/modules/memberStore";
+import vuetify from "./plugins/vuetify";
 
 // Make BootstrapVue available throughout your project
 Vue.use(BootstrapVue);
@@ -21,11 +22,14 @@ export const eventBus = new Vue();
 new Vue({
   router,
   store,
+
   async beforeCreate() {
     let token = sessionStorage.getItem("access-token");
     if (memberStore.state.userInfo == null && token) {
       await memberStore.dispatch("getUserInfo", token);
     }
   },
+
+  vuetify,
   render: (h) => h(App),
 }).$mount("#app");

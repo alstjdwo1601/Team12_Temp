@@ -14,7 +14,7 @@
           variant="outline-info"
           size="sm"
           @click="moveModifyArticle"
-          class="mr-2"
+          class="mr-3"
           >글수정</b-button
         >
         <b-button variant="outline-danger" size="sm" @click="removeArticle"
@@ -22,6 +22,7 @@
         >
       </b-col>
     </b-row>
+    <hr />
     <b-row class="mb-1">
       <b-col>
         <b-card
