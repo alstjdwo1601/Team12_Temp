@@ -67,8 +67,9 @@ export default {
   mounted() {
     eventBus.$on("aptList", (data) => {
       this.getAptList(data);
-      this.cntTotal(data.dongCode);
+      this.cntTotal(data);
       this.dongCode = data.dongCode;
+      this.word = data.word;
     });
   },
   computed: {
@@ -106,7 +107,7 @@ export default {
       let param = {
         pg: pgNum,
         dongCode: this.dongCode,
-        word: null,
+        word: this.word,
       };
       this.getAptList(param);
     },

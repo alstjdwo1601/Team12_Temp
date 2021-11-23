@@ -1,5 +1,5 @@
 <template>
-  <div id="map" style="width: 100%; height: 500px"></div>
+  <div class="mb-5" id="map" style="width: 100%; height: 500px"></div>
 </template>
 
 <script>
@@ -40,6 +40,10 @@ export default {
     }
     eventBus.$on("markerMap", (data) => {
       this.datas = data;
+    });
+
+    eventBus.$on("mapReset", () => {
+      this.initMap();
     });
   },
   methods: {

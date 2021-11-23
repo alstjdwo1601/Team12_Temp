@@ -1,38 +1,18 @@
 <template>
-  <div class="overlaybox">
-    <div class="boxtitle"></div>
-    <div class="first">
-      <img
-        :src="require('@/assets/apt.png')"
-        fluid-grow
-        style="width: 247px; height: 136px"
-        alt=""
-      />
-    </div>
-    <ul>
-      <li class="up">
-        <span class="title">건축년도</span>
-        <span class="count"></span>
-      </li>
-      <li>
-        <span class="title">주소</span>
-        <span class="count"></span>
-      </li>
-      <li>
-        <span class="title">최신거래금액</span>
-        <span class="count"></span>
-      </li>
-      <li>
-        <span
-          class="last"
-          id="recenthistor"
-          data-toggle="modal"
-          data-target="#myModal"
-          >아파트정보 update</span
-        >
-      </li>
-    </ul>
-  </div>
+  <b-overlay
+    :show="show"
+    spinner-variant="primary"
+    spinner-type="grow"
+    spinner-small
+    rounded="sm"
+    opacity="1"
+  >
+    <b-card title="" :aria-hidden="show ? 'true' : null">
+      <b-img :src="require('@/assets/apt.png')" fluid alt="" />
+      <hr />
+      <b-table stacked :items="house"></b-table>
+    </b-card>
+  </b-overlay>
   <!--
   <b-container v-if="house" class="bv-example-row">
     <b-row>
@@ -85,11 +65,21 @@
 
 <script>
 import { mapState } from "vuex";
-
+import { eventBus } from "../../main.js";
 const houseStore = "houseStore";
 
 export default {
   name: "HouseDetail",
+  data() {
+    return {
+      show: true,
+    };
+  },
+  mounted() {
+    eventBus.$on("showDetail", (data) => {
+      this.show = data;
+    });
+  },
   computed: {
     ...mapState(houseStore, ["house"]),
     // house() {

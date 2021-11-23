@@ -16,6 +16,7 @@
         <house-detail />
       </b-col>
     </b-row>
+    <hr />
     <b-row>
       <b-col>
         <house-map></house-map>

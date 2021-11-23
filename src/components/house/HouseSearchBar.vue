@@ -31,6 +31,23 @@
         @change="searchApt"
       ></b-form-select>
     </b-col>
+    <b-row class="mb-3">
+      <b-col class="text-right">
+        <b-button variant="outline-danger" style="float: right" @click="reset"
+          >초기화</b-button
+        >
+        <b-button
+          variant="outline-primary"
+          style="float: right"
+          @click="searchPg"
+          >검색</b-button
+        >
+        <b-form-input
+          v-model="word"
+          style="width: 250px; float: right"
+        ></b-form-input>
+      </b-col>
+    </b-row>
   </b-row>
 </template>
 
@@ -56,6 +73,7 @@ export default {
       sidoCode: null,
       gugunCode: null,
       dongCode: null,
+      word: null,
 
       busData: [],
     };
@@ -127,6 +145,28 @@ export default {
         };
         eventBus.$emit("aptList", param);
       }
+    },
+
+    searchPg() {
+      let param = {
+        pg: 1,
+        dongCode: this.dongCode,
+        word: this.word,
+      };
+      eventBus.$emit("aptList", param);
+    },
+
+    reset() {
+      this.CLEAR_SIDO_LIST();
+      this.CLEAR_GUGUN_LIST();
+      this.CLEAR_DONG_LIST();
+      this.CLEAR_APT_LIST();
+      this.CLEAR_HOUSE_LIST();
+      this.CLEAR_DETAIL_HOUSE();
+      this.word = null;
+      eventBus.$emit("mapReset");
+      eventBus.$emit("showDetail", true);
+      this.getSido();
     },
   },
 };

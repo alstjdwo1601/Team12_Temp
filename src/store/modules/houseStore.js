@@ -18,7 +18,7 @@ const houseStore = {
     total: 0,
     apts: [],
     houses: [],
-    house: null,
+    house: [],
   },
 
   getters: {},
@@ -59,8 +59,16 @@ const houseStore = {
       //   console.log(houses);
       state.houses = houses;
     },
-    SET_DETAIL_HOUSE: (state, house) => {
-      state.house = house;
+    SET_DETAIL_HOUSE: (state, apt) => {
+      state.house = [
+        {
+          아파트: apt.aptName,
+          일련번호: apt.aptCode,
+          법정동: apt.dongName,
+          건립연도: apt.buildYear,
+          지번: apt.jibun,
+        },
+      ];
     },
     CLEAR_APT_LIST: (state) => {
       state.apts = [];
@@ -69,7 +77,7 @@ const houseStore = {
       state.houses = [];
     },
     CLEAR_DETAIL_HOUSE: (state) => {
-      state.house = null;
+      state.house = [];
     },
   },
 
@@ -131,9 +139,10 @@ const houseStore = {
         }
       );
     },
-    cntTotal: ({ commit }, dongCode) => {
+    cntTotal: ({ commit }, param) => {
       let params = {
-        dong: dongCode,
+        word: param.word,
+        dong: param.dongCode,
       };
       getTotal(
         params,
@@ -167,9 +176,9 @@ const houseStore = {
         }
       );
     },
-    detailHouse: ({ commit }, house) => {
+    detailHouse: ({ commit }, apt) => {
       // 나중에 house.일련번호를 이용하여 API 호출
-      commit("SET_DETAIL_HOUSE", house);
+      commit("SET_DETAIL_HOUSE", apt);
     },
   },
 };
