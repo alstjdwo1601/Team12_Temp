@@ -127,7 +127,7 @@ export default {
 
     searchApt() {
       this.CLEAR_APT_LIST();
-      if (this.dongCode) {
+      if (this.dongCode != null) {
         let param = {
           pg: 1,
           dongCode: this.dongCode,

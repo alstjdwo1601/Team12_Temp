@@ -6,6 +6,7 @@ import {
   houseList,
   getTotal,
   getAttention,
+  getCnt,
 } from "@/api/house.js";
 import { eventBus } from "../../main.js";
 
@@ -16,11 +17,12 @@ const houseStore = {
     guguns: [{ value: null, text: "선택하세요" }],
     dongs: [{ value: null, text: "선택하세요" }],
 
+    atotal: 0,
     total: 0,
     apts: [],
     houses: [],
     house: [],
-
+    attentions: {},
     checked: [],
   },
 
@@ -44,6 +46,15 @@ const houseStore = {
     },
     SET_CNT: (state, total) => {
       state.total = total;
+    },
+    SET_CNT_ATTENTION: (state, cnt) => {
+      state.atotal = cnt;
+    },
+    SET_ATTENTION_INFO: (state, atten) => {
+      state.attentions = atten;
+    },
+    CLEAR_ATTENTION_INFO: (state) => {
+      state.attentions = {};
     },
     CLEAR_SIDO_LIST: (state) => {
       state.sidos = [{ value: null, text: "선택하세요" }];
@@ -196,6 +207,21 @@ const houseStore = {
         param,
         ({ data }) => {
           commit("SET_CHECKED", data);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    },
+
+    gTotal: ({ commit }, params) => {
+      let param = {
+        id: params.id,
+      };
+      getCnt(
+        param,
+        ({ data }) => {
+          commit("SET_CNT_ATTENTION", data);
         },
         (error) => {
           console.log(error);

@@ -33,6 +33,16 @@ function getAttention(params, success, fail) {
 function delAttention(params, success, fail) {
   api.delete(`/map/del`, { params: params }).then(success).catch(fail);
 }
+
+//aptcode 갯수
+function getCnt(params, success, fail) {
+  api.get(`/map/cnt`, { params: params }).then(success).catch(fail);
+}
+
+//aptcode로 비교해서 houseinfo 뽑기
+function getHouseInfo(params, success, fail) {
+  api.get(`/map/house`, { params: params }).then(success).catch(fail);
+}
 export {
   sidoList,
   gugunList,
@@ -43,4 +53,6 @@ export {
   setAttention,
   getAttention,
   delAttention,
+  getCnt,
+  getHouseInfo,
 };

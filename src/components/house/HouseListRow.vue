@@ -107,6 +107,7 @@ export default {
               console.log(response.data);
               this.CLEAR_CHECKED();
               this.gAttention(params);
+              this.$router.go();
             },
             (error) => {
               console.log(error);

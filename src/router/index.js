@@ -16,6 +16,9 @@ import BoardView from "@/components/board/BoardView.vue";
 import BoardUpdate from "@/components/board/BoardUpdate.vue";
 
 import House from "@/views/House.vue";
+import HouseAL from "@/components/house/HouseAL.vue";
+import HouseList from "@/components/house/HouseList.vue";
+import HouseAList from "@/components/house/HouseAList.vue";
 
 import store from "@/store/index.js";
 
@@ -116,6 +119,27 @@ const routes = [
     path: "/house",
     name: "House",
     component: House,
+    redirect: "/house/houseal/houseL",
+    children: [
+      {
+        path: "houseal",
+        name: "HouseAL",
+        component: HouseAL,
+        children: [
+          {
+            path: "houseL",
+            name: "HouseList",
+            component: HouseList,
+          },
+          {
+            path: "houseA",
+            name: "HouseAList",
+            beforeEnter: onlyAuthUser,
+            component: HouseAList,
+          },
+        ],
+      },
+    ],
   },
   {
     path: "*",
