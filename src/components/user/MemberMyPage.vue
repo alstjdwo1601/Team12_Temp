@@ -13,7 +13,7 @@
 
       <v-img height="400" src="@/assets/user.png"></v-img>
 
-      <v-card-title>[{{ userInfo.userid }}] 님 회원정보</v-card-title>
+      <v-card-title>[{{ userInfo.username }}] 님 회원정보</v-card-title>
 
       <v-card-text>
         <v-row align="center" class="mx-0">
@@ -54,6 +54,34 @@
 
       <v-divider class="mx-4"></v-divider>
 
+      <!--
+        여기에 관심아파트 목록 테이블 추가
+
+
+
+        <v-simple-table dark>
+          <template v-slot:default>
+            <thead>
+              <tr>
+                <th class="text-center">이미지</th>
+                <th class="text-center">아파트명</th>
+                <th class="text-center">일련번호</th>
+                <th class="text-center">거리정보?</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{{  }}</td>
+                <td>{{  }}</td>
+                <td>{{  }}</td>
+                <td>{{  }}</td>
+              </tr>
+            </tbody>
+          </template>
+        </v-simple-table>
+      -->
+
+      <v-divider class="mx-4"></v-divider>
       <b-button variant="warning" class="mr-1"
         ><router-link :to="{ name: 'Modify' }" class="link align-self-center"
           >정보수정</router-link
