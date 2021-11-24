@@ -60,7 +60,7 @@ const routes = [
         component: MemberLogin,
       },
       {
-        path: "singup",
+        path: "signup",
         name: "SignUp",
         component: MemberJoin,
       },

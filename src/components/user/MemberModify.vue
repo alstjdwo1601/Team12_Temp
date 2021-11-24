@@ -25,8 +25,6 @@
             readonly
             size="14"
           ></v-rating>
-
-          <div class="grey--text ms-4">거래 신뢰도 : 4.5</div>
         </v-row>
         <br />
         <br />

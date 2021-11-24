@@ -2,13 +2,9 @@
   <div>
     <br />
     <br />
-    <br />
-    <br />
-    <br />
-    <br />
     <hr />
-    <v-footer dark padless>
-      <v-card flat tile class="indigo lighten-1 white--text text-center">
+    <v-footer color="warning lighten-1">
+      <v-card flat tile class="warning lighten-1 white--text text-center">
         <v-card-text>
           <v-btn
             v-for="icon in icons"

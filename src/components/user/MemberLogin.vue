@@ -2,13 +2,14 @@
   <b-container class="bv-example-row mt-3">
     <b-row>
       <b-col>
-        <b-alert variant="primary" show><h3>로그인</h3></b-alert>
+        <b-alert variant="warning" show><h3>로그인</h3></b-alert>
       </b-col>
     </b-row>
     <b-row>
       <b-col></b-col>
       <b-col cols="8">
         <b-card class="text-center mt-3" style="max-width: 40rem" align="left">
+          <br />
           <b-form class="text-left">
             <v-alert border="top" color="red lighten-2" dark v-if="isLoginError"
               >아이디 또는 비밀번호를 확인하세요.</v-alert
@@ -22,6 +23,7 @@
                 @keyup.enter="confirm"
               ></b-form-input>
             </b-form-group>
+            <br />
             <b-form-group label="비밀번호:" label-for="userpwd">
               <b-form-input
                 type="password"
@@ -32,16 +34,17 @@
                 @keyup.enter="confirm"
               ></b-form-input>
             </b-form-group>
+            <br />
             <b-button
               type="button"
-              variant="primary"
+              variant="warning"
               class="m-1"
               @click="confirm"
               >로그인</b-button
-            >
+            >&nbsp;
             <b-button
               type="button"
-              variant="success"
+              variant="primary"
               class="m-1"
               @click="movePage"
               >회원가입</b-button

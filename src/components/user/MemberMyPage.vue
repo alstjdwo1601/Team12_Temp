@@ -25,12 +25,10 @@
             readonly
             size="14"
           ></v-rating>
-
-          <div class="grey--text ms-4">거래 신뢰도 : 4.5</div>
         </v-row>
         <br />
         <br />
-        <v-simple-table dark>
+        <v-simple-table>
           <template v-slot:default>
             <thead>
               <tr>
@@ -81,7 +79,6 @@
         </v-simple-table>
       -->
 
-      <v-divider class="mx-4"></v-divider>
       <b-button variant="warning" class="mr-1"
         ><router-link :to="{ name: 'Modify' }" class="link align-self-center"
           >정보수정</router-link

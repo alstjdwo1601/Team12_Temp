@@ -1,13 +1,9 @@
 <template>
   <b-container class="bv-example-row mt-3">
-    <b-row>
-      <b-col>
-        <b-alert show><h3>글목록</h3></b-alert>
-      </b-col>
-    </b-row>
+    <b-row> </b-row>
     <b-row class="mb-1">
       <b-col class="text-right">
-        <b-button variant="outline-primary" @click="moveWrite()"
+        <b-button variant="outline-warning" @click="moveWrite()"
           >글쓰기</b-button
         >
       </b-col>
@@ -16,7 +12,7 @@
     <b-row>
       <b-col v-if="articles.length">
         <b-table-simple hover responsive>
-          <b-thead head-variant="dark">
+          <b-thead style="background-color: #ffc107">
             <b-tr>
               <b-th>글번호</b-th>
               <b-th>제목</b-th>
@@ -41,7 +37,7 @@
       <b-col class="text-right">
         &nbsp;&nbsp;&nbsp;
         <b-button
-          variant="outline-primary"
+          variant="outline-warning"
           style="float: right"
           @click="searchPg"
           >검색</b-button
@@ -67,12 +63,12 @@
       <b-button-group class="mx-1">
         <b-button
           size="sm"
-          variant="primary"
+          variant="warning"
           :disabled="pg == 1"
           @click="firstPg"
           >&laquo;</b-button
         >
-        <b-button size="sm" variant="primary" :disabled="pg == 1" @click="prePg"
+        <b-button size="sm" variant="warning" :disabled="pg == 1" @click="prePg"
           >&lsaquo;</b-button
         >
       </b-button-group>
@@ -80,14 +76,14 @@
       <b-button-group class="mx-1">
         <b-button
           size="sm"
-          variant="primary"
+          variant="warning"
           :disabled="pg == totalCnt"
           @click="nextPg"
           >&rsaquo;</b-button
         >
         <b-button
           size="sm"
-          variant="primary"
+          variant="warning"
           :disabled="pg == totalCnt"
           @click="endPg"
           >&raquo;</b-button

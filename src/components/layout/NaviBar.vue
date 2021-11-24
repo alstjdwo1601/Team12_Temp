@@ -1,50 +1,38 @@
 <template>
   <div>
-    <b-navbar toggleable="lg" type="dark" variant="dark">
+    <b-navbar toggleable="lg" type="white" variant="warning">
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       <b-navbar-brand href="#">
         <router-link to="/">
           <img
-            src="@/assets/123.png"
+            src="@/assets/home.png"
             class="d-inline-block align-middle"
-            width="90px"
+            width="30px"
             alt="Kitten"
           />
         </router-link>
       </b-navbar-brand>
-
-      <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
-
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       <b-collapse id="nav-collapse" is-nav>
-        <b-navbar-nav>
-          <b-nav-item href="#"
-            ><router-link :to="{ name: 'Home' }" class="link"
-              ><b-icon icon="house" font-scale="1"></b-icon> HOME</router-link
-            ></b-nav-item
-          >
-          <b-nav-item href="#"
-            ><router-link :to="{ name: 'Board' }" class="link"
-              ><b-icon icon="journal" font-scale="1"></b-icon>
-              게시판</router-link
-            ></b-nav-item
-          >
-          <b-nav-item href="#"
-            ><router-link :to="{ name: 'Instargram' }" class="link"
-              ><b-icon icon="instagram" font-scale="1"></b-icon>
-              인별그램</router-link
-            ></b-nav-item
-          >
-          <b-nav-item href="#"
-            ><router-link :to="{ name: 'House' }" class="link"
-              ><b-icon icon="house-fill" font-scale="1"></b-icon>
-              아파트정보</router-link
-            ></b-nav-item
-          >
-        </b-navbar-nav>
+        <v-btn
+          v-for="(link, i) in links"
+          :key="i"
+          v-bind="link"
+          class="hidden-sm-and-down"
+          text
+          @click="onClick($event, link)"
+        >
+          {{ link.text }}
+        </v-btn>
 
         <b-navbar-nav class="ml-auto" v-if="userInfo">
           <b-nav-item class="align-self-center"
-            ><b-avatar variant="success" icon="people-fill"></b-avatar
-            >&nbsp;&nbsp;&nbsp;{{ userInfo.username }}({{ userInfo.userid }})님
+            ><img
+              src="@/assets/user2.png"
+              class="d-inline-block align-middle"
+              width="30px"
+              alt="Kitten"
+            />&nbsp;&nbsp;&nbsp; <b> [{{ userInfo.username }}]</b> 님
             환영합니다.</b-nav-item
           >
           <b-nav-item class="align-self-center"
@@ -60,19 +48,36 @@
             >로그아웃</b-nav-item
           >
         </b-navbar-nav>
+
         <b-navbar-nav class="ml-auto" v-else>
           <b-nav-item-dropdown right>
             <template #button-content>
-              <b-icon icon="people" font-scale="2"></b-icon>
+              <img
+                src="@/assets/user4.png"
+                class="d-inline-block align-middle"
+                width="30px"
+                alt="Kitten"
+              />
             </template>
             <b-dropdown-item href="#"
               ><router-link :to="{ name: 'SignUp' }" class="link"
-                ><b-icon icon="person-circle"></b-icon> 회원가입</router-link
+                ><img
+                  src="@/assets/add-user.png"
+                  class="d-inline-block align-middle"
+                  width="30px"
+                  alt="Kitten"
+                />&nbsp;&nbsp; 회원가입</router-link
               ></b-dropdown-item
             >
             <b-dropdown-item href="#"
               ><router-link :to="{ name: 'SignIn' }" class="link"
-                ><b-icon icon="key"></b-icon> 로그인</router-link
+                ><img
+                  src="@/assets/login.png"
+                  class="d-inline-block align-middle"
+                  width="30px"
+                  alt="Kitten"
+                />
+                &nbsp;&nbsp; 로그인</router-link
               ></b-dropdown-item
             >
           </b-nav-item-dropdown>
@@ -83,14 +88,16 @@
 </template>
 
 <script>
-import { mapState, mapMutations } from "vuex";
+import { mapState, mapMutations, mapGetters } from "vuex";
 
 const memberStore = "memberStore";
+const templateStore = "templateStore";
 
 export default {
   name: "NaviBar",
   computed: {
     ...mapState(memberStore, ["isLogin", "userInfo"]),
+    ...mapGetters(templateStore, ["links"]),
   },
   methods: {
     ...mapMutations(memberStore, ["SET_IS_LOGIN", "SET_USER_INFO"]),
@@ -99,6 +106,14 @@ export default {
       this.SET_USER_INFO(null);
       sessionStorage.removeItem("access-token");
       if (this.$route.path != "/") this.$router.push({ name: "Home" });
+    },
+
+    onClick(e, item) {
+      e.stopPropagation();
+
+      if (item.to || !item.href) return;
+
+      this.$vuetify.goTo(item.href.endsWith("!") ? 0 : item.href);
     },
   },
 };

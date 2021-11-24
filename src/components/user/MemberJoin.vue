@@ -2,7 +2,7 @@
   <b-container class="bv-example-row mt-3">
     <b-row>
       <b-col>
-        <b-alert variant="primary" show><h3>회원가입</h3></b-alert>
+        <b-alert variant="warning" show><h3>회원가입</h3></b-alert>
       </b-col>
     </b-row>
     <b-row>
@@ -29,8 +29,6 @@
                     :rules="[rules.required, rules.min]"
                     :type="show1 ? 'text' : 'password'"
                     name="input-10-1"
-                    label="영어와 숫자를 혼합해주세요."
-                    hint="At least 8 characters"
                     counter
                     @click:append="show1 = !show1"
                   ></v-text-field>
@@ -45,7 +43,7 @@
             </tbody>
           </template>
         </v-simple-table>
-        <hr />
+
         <br />
         <b-button variant="warning" @click="joinUser" class="mr-1"
           >가입 완료</b-button

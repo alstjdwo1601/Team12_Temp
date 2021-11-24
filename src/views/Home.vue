@@ -1,11 +1,7 @@
 <template>
   <div>
     <b-container class="bv-example-row mt-3">
-      <b-row>
-        <b-col>
-          <b-alert show><h3 align="center">Happy House</h3></b-alert>
-        </b-col>
-      </b-row>
+      <b-row> </b-row>
     </b-container>
     <hr />
     <v-card class="mx-auto" max-width="1024">

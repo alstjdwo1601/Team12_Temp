@@ -7,11 +7,21 @@
         <hr />
         <br />
         <br />
-        <h4>그동안 HappyHouse를 이용해 주셔서 감사합니다.</h4>
+        <img
+          src="@/assets/home.png"
+          class="d-inline-block align-middle"
+          width="100px"
+          alt="Kitten"
+        />
+        <br />
+        <br />
+        <br />
+        <br />
+        <h4><b>그동안 HappyHouse를 이용해 주셔서 감사합니다 . </b></h4>
       </v-card-text>
       <br />
       <br />
-      <b-button variant="danger" @click="deleteInfo" class="mr-1"
+      <b-button variant="warning" @click="deleteInfo" class="mr-1"
         >탈퇴 완료하기</b-button
       >&nbsp;&nbsp;
       <b-button variant="primary" @click="back" class="mr-1">돌아가기</b-button>
