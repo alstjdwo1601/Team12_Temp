@@ -8,6 +8,7 @@
       v-for="(check, index) in checked"
       :key="index"
       :check="check"
+      :pg="pg"
     />
     <b-button-toolbar
       class="mb-5"
@@ -68,21 +69,20 @@ export default {
   data() {
     return {
       pg: 1,
-      aptCode: null,
-      word: null,
     };
   },
   created() {
-    this.CLEAR_CHECKED();
     if (this.isLogin) {
-      let params = {
+      this.CLEAR_CHECKED();
+      let param = {
         pg: 1,
-        spp: 5,
         id: this.userInfo.userid,
       };
-      //aptcode 구하기
-      this.gAttention(params);
-      //id에 저장된 aptcode 갯수
+      this.gAttention(param);
+
+      let params = {
+        id: this.userInfo.userid,
+      };
       this.gTotal(params);
     }
   },
@@ -120,12 +120,15 @@ export default {
       this.chagePg(this.pg);
     },
     chagePg(pgNum) {
+      this.CLEAR_CHECKED();
+      console.log("aL - 체크 삭제");
       let param = {
         pg: pgNum,
         spp: 5,
         id: this.userInfo.userid,
       };
       this.gAttention(param);
+      console.log("aL - 체크 추가");
     },
   },
 };

@@ -38,6 +38,7 @@ export default {
   },
   props: {
     check: Number,
+    pg: Number,
   },
   created() {
     let param = {
@@ -76,6 +77,7 @@ export default {
     checkbox(data) {
       if (this.userInfo) {
         let params = {
+          pg: this.pg,
           id: this.userInfo.userid,
           aptCode: data,
         };

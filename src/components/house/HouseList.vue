@@ -48,8 +48,7 @@
 
 <script>
 import HouseListRow from "@/components/house/HouseListRow.vue";
-import { mapActions, mapState, mapMutations } from "vuex";
-import { eventBus } from "../../main.js";
+import { mapActions, mapState } from "vuex";
 
 const houseStore = "houseStore";
 const memberStore = "memberStore";
@@ -62,30 +61,11 @@ export default {
   data() {
     return {
       pg: 1,
-      dongCode: null,
-      word: null,
     };
-  },
-  created() {
-    this.CLEAR_CHECKED();
-    if (this.isLogin) {
-      let params = {
-        id: this.userInfo.userid,
-      };
-      this.gAttention(params);
-    }
-  },
-  mounted() {
-    eventBus.$on("aptList", (data) => {
-      this.getAptList(data);
-      this.cntTotal(data);
-      this.dongCode = data.dongCode;
-      this.word = data.word;
-    });
   },
   computed: {
     ...mapState(memberStore, ["isLogin", "userInfo"]),
-    ...mapState(houseStore, ["apts", "total"]),
+    ...mapState(houseStore, ["apts", "total", "setword", "setdong"]),
     totalCnt() {
       let listLeng = this.total,
         listSize = 5,
@@ -98,8 +78,7 @@ export default {
     // },
   },
   methods: {
-    ...mapMutations(houseStore, ["CLEAR_CHECKED"]),
-    ...mapActions(houseStore, ["getAptList", "cntTotal", "gAttention"]),
+    ...mapActions(houseStore, ["getAptList"]),
     firstPg() {
       this.pg = 1;
       this.chagePg(this.pg);
@@ -119,8 +98,8 @@ export default {
     chagePg(pgNum) {
       let param = {
         pg: pgNum,
-        dongCode: this.dongCode,
-        word: this.word,
+        dongCode: this.setdong,
+        word: this.setword,
       };
       this.getAptList(param);
     },

@@ -19,11 +19,16 @@ const houseStore = {
 
     atotal: 0,
     total: 0,
+
     apts: [],
     houses: [],
     house: [],
+
     attentions: {},
     checked: [],
+
+    setdong: null,
+    setword: null,
   },
 
   getters: {},
@@ -44,6 +49,20 @@ const houseStore = {
         state.dongs.push({ value: dong.dongCode, text: dong.dongName });
       });
     },
+
+    SET_DONG: (state, dongCode) => {
+      state.setdong = dongCode;
+    },
+    SET_WORD: (state, word) => {
+      state.setword = word;
+    },
+    CLEAR_DONG: (state) => {
+      state.setdong = null;
+    },
+    CLEAR_WORD: (state) => {
+      state.setword = null;
+    },
+
     SET_CNT: (state, total) => {
       state.total = total;
     },
@@ -164,8 +183,9 @@ const houseStore = {
     cntTotal: ({ commit }, param) => {
       let params = {
         word: param.word,
-        dong: param.dongCode,
+        dong: param.dong,
       };
+      console.log(params);
       getTotal(
         params,
         ({ data }) => {
@@ -202,7 +222,12 @@ const houseStore = {
       // 나중에 house.일련번호를 이용하여 API 호출
       commit("SET_DETAIL_HOUSE", apt);
     },
-    gAttention: ({ commit }, param) => {
+    gAttention: ({ commit }, params) => {
+      const param = {
+        pg: params.pg,
+        spp: 5,
+        id: params.id,
+      };
       getAttention(
         param,
         ({ data }) => {

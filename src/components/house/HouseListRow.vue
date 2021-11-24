@@ -45,6 +45,8 @@ export default {
       } else {
         this.flag = false;
       }
+    } else {
+      this.flag = false;
     }
     //console.log(this.checked)
   },
@@ -56,6 +58,8 @@ export default {
         } else {
           this.flag = false;
         }
+      } else {
+        this.flage = false;
       }
     },
   },
@@ -66,6 +70,7 @@ export default {
   methods: {
     ...mapMutations(houseStore, ["CLEAR_CHECKED"]),
     ...mapActions(houseStore, ["detailHouse", "gAttention"]),
+
     selectHouse() {
       this.detailHouse(this.apt);
       eventBus.$emit("showDetail", false);
@@ -93,7 +98,9 @@ export default {
             (response) => {
               console.log(response.data);
               this.CLEAR_CHECKED();
+              console.log("lr - 체크 삭제");
               this.gAttention(params);
+              console.log("lr - 체크 추가");
             },
             (error) => {
               console.log(error);
@@ -106,8 +113,9 @@ export default {
             (response) => {
               console.log(response.data);
               this.CLEAR_CHECKED();
+              console.log("lr - 체크 삭제");
               this.gAttention(params);
-              this.$router.go();
+              console.log("lr - 체크 추가");
             },
             (error) => {
               console.log(error);

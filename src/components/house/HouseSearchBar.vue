@@ -69,7 +69,15 @@ export default {
     };
   },
   computed: {
-    ...mapState(houseStore, ["sidos", "guguns", "dongs", "apts"]),
+    ...mapState(houseStore, [
+      "sidos",
+      "guguns",
+      "dongs",
+      "apts",
+      "setdong",
+      "setword",
+      "total",
+    ]),
     // sidos() {
     //   return this.$store.state.sidos;
     // },
@@ -78,11 +86,8 @@ export default {
     // this.$store.dispatch("getSido");
     // this.sidoList();
     this.CLEAR_SIDO_LIST();
-    this.CLEAR_GUGUN_LIST();
-    this.CLEAR_DONG_LIST();
-    this.CLEAR_APT_LIST();
-    this.CLEAR_HOUSE_LIST();
-    this.CLEAR_DETAIL_HOUSE();
+    this.CLEAR_WORD();
+    this.CLEAR_DONG();
     this.getSido();
   },
   methods: {
@@ -92,8 +97,14 @@ export default {
       "getDong",
       "getAptList",
       "getHouseList",
+      "cntTotal",
     ]),
     ...mapMutations(houseStore, [
+      "SET_DONG",
+      "SET_WORD",
+
+      "CLEAR_DONG",
+      "CLEAR_WORD",
       "CLEAR_SIDO_LIST",
       "CLEAR_GUGUN_LIST",
       "CLEAR_DONG_LIST",
@@ -107,18 +118,11 @@ export default {
     // },
     gugunList() {
       // console.log(this.sidoCode);
-      this.CLEAR_APT_LIST();
-      this.CLEAR_HOUSE_LIST();
-      this.CLEAR_DETAIL_HOUSE();
       this.CLEAR_GUGUN_LIST();
-      this.CLEAR_DONG_LIST();
       if (this.sidoCode) this.getGugun(this.sidoCode);
     },
 
     dongList() {
-      this.CLEAR_APT_LIST();
-      this.CLEAR_HOUSE_LIST();
-      this.CLEAR_DETAIL_HOUSE();
       this.CLEAR_DONG_LIST();
       if (this.gugunCode) {
         this.getDong(this.gugunCode);
@@ -127,23 +131,38 @@ export default {
 
     searchApt() {
       this.CLEAR_APT_LIST();
-      if (this.dongCode != null) {
-        let param = {
-          pg: 1,
-          dongCode: this.dongCode,
-          word: null,
-        };
-        eventBus.$emit("aptList", param);
-      }
-    },
+      this.SET_DONG(this.dongCode);
 
-    searchPg() {
       let param = {
         pg: 1,
         dongCode: this.dongCode,
-        word: this.word,
+        word: null,
       };
-      eventBus.$emit("aptList", param);
+      this.getAptList(param);
+
+      let params = {
+        word: this.setword,
+        dong: this.setdong,
+      };
+      this.cntTotal(params);
+    },
+
+    searchPg() {
+      this.CLEAR_APT_LIST();
+      this.SET_WORD(this.word);
+
+      let param = {
+        pg: 1,
+        dongCode: this.setdong,
+        word: this.setword,
+      };
+      this.getAptList(param);
+      let params = {
+        word: this.setword,
+        dong: this.setdong,
+      };
+      this.cntTotal(params);
+      console.log(this.total);
     },
 
     reset() {
@@ -151,12 +170,10 @@ export default {
       this.CLEAR_GUGUN_LIST();
       this.CLEAR_DONG_LIST();
       this.CLEAR_APT_LIST();
-      this.CLEAR_HOUSE_LIST();
-      this.CLEAR_DETAIL_HOUSE();
+      this.getSido();
       this.word = null;
       eventBus.$emit("mapReset");
       eventBus.$emit("showDetail", true);
-      this.getSido();
     },
   },
 };
