@@ -39,6 +39,7 @@
     </b-row>
     <b-row class="mb-3">
       <b-col class="text-right">
+        &nbsp;&nbsp;&nbsp;
         <b-button
           variant="outline-primary"
           style="float: right"
@@ -49,6 +50,7 @@
           v-model="word"
           style="width: 250px; float: right"
         ></b-form-input>
+        &nbsp;&nbsp;&nbsp;
         <b-form-select
           v-model="key"
           :options="options"
