@@ -1,7 +1,7 @@
 <template>
   <b-overlay
     :show="show"
-    spinner-variant="primary"
+    spinner-variant="warning"
     spinner-type="grow"
     spinner-small
     rounded="sm"

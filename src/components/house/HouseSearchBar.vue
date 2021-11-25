@@ -35,8 +35,9 @@
       <b-form-input v-model="word"></b-form-input>
     </b-col>
     <div class="mt-2" style="padding-top: 3px">
-      <b-button variant="outline-primary" @click="searchPg">검색</b-button>
-      <b-button variant="outline-danger" @click="reset">초기화</b-button>
+      <b-button variant="outline-warning" @click="searchPg">검색</b-button>
+      &nbsp;&nbsp;
+      <b-button variant="outline-primary" @click="reset">초기화</b-button>
     </div>
   </b-row>
 </template>

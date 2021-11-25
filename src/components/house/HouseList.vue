@@ -1,6 +1,6 @@
 <template>
   <b-container v-if="apts && apts.length != 0" class="bv-example-row mt-3">
-    <span>관심아파트</span>
+    <hr />
     <house-list-row v-for="(apt, index) in apts" :key="index" :apt="apt" />
     <b-button-toolbar
       class="mb-5"
@@ -11,12 +11,12 @@
       <b-button-group class="mx-1">
         <b-button
           size="sm"
-          variant="primary"
+          variant="warning"
           :disabled="pg == 1"
           @click="firstPg"
           >&laquo;</b-button
         >
-        <b-button size="sm" variant="primary" :disabled="pg == 1" @click="prePg"
+        <b-button size="sm" variant="warning" :disabled="pg == 1" @click="prePg"
           >&lsaquo;</b-button
         >
       </b-button-group>
@@ -24,14 +24,14 @@
       <b-button-group class="mx-1">
         <b-button
           size="sm"
-          variant="primary"
+          variant="warning"
           :disabled="pg == totalCnt"
           @click="nextPg"
           >&rsaquo;</b-button
         >
         <b-button
           size="sm"
-          variant="primary"
+          variant="warning"
           :disabled="pg == totalCnt"
           @click="endPg"
           >&raquo;</b-button

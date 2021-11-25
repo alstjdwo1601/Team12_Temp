@@ -3,28 +3,38 @@
     v-if="checked && checked.length != 0"
     class="bv-example-row mt-3"
   >
-    <span>관심아파트</span>
+    <span
+      >&nbsp;&nbsp;&nbsp;&nbsp;<img
+        class="white--text align-end"
+        height="20px"
+        src="@/assets/favourite.png"
+      />&nbsp;&nbsp;&nbsp;<b>내 관심아파트 목록</b></span
+    >
+    <br />
+    <hr />
     <house-a-list-row
       v-for="(check, index) in checked"
       :key="index"
       :check="check"
       :pg="pg"
     />
+    <br />
     <b-button-toolbar
       class="mb-5"
       key-nav
       aria-label="Toolbar with button groups"
       style="justify-content: center"
     >
+      <br />
       <b-button-group class="mx-1">
         <b-button
           size="sm"
-          variant="primary"
+          variant="warning"
           :disabled="pg == 1"
           @click="firstPg"
           >&laquo;</b-button
         >
-        <b-button size="sm" variant="primary" :disabled="pg == 1" @click="prePg"
+        <b-button size="sm" variant="warning" :disabled="pg == 1" @click="prePg"
           >&lsaquo;</b-button
         >
       </b-button-group>
@@ -32,14 +42,14 @@
       <b-button-group class="mx-1">
         <b-button
           size="sm"
-          variant="primary"
+          variant="warning"
           :disabled="pg == totalCnt"
           @click="nextPg"
           >&rsaquo;</b-button
         >
         <b-button
           size="sm"
-          variant="primary"
+          variant="warning"
           :disabled="pg == totalCnt"
           @click="endPg"
           >&raquo;</b-button

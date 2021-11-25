@@ -1,8 +1,5 @@
 <template>
   <b-container class="bv-example-row mt-3 text-center">
-    <h3 class="underline-orange">
-      <b-icon icon="house-fill"></b-icon> House Service
-    </h3>
     <b-row>
       <b-col>
         <house-search-bar></house-search-bar>
@@ -10,12 +7,15 @@
     </b-row>
     <b-row>
       <b-col cols="6" align="left">
-        <router-link :to="{ name: 'HouseList' }" class="link"
-          >검색결과</router-link
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <b-button variant="warning" @click="houseList" class="mr-1"
+          >검색 결과</b-button
         >
-        <router-link :to="{ name: 'HouseAList' }" class="link"
-          >관심지역</router-link
+        &nbsp;&nbsp;
+        <b-button variant="primary" @click="houseAList" class="mr-1"
+          >관심아파트 고르기</b-button
         >
+
         <house-a-l />
       </b-col>
       <b-col cols="6">
@@ -42,6 +42,14 @@ export default {
     HouseDetail,
     HouseMap,
     HouseAL,
+  },
+  methods: {
+    houseList() {
+      this.$router.push({ name: "HouseList" });
+    },
+    houseAList() {
+      this.$router.push({ name: "HouseAList" });
+    },
   },
 };
 </script>
