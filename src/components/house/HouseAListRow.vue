@@ -71,8 +71,8 @@ export default {
     ...mapState(houseStore, ["userhouse"]),
   },
   methods: {
-    ...mapMutations(houseStore, ["CLEAR_CHECKED"]),
-    ...mapActions(houseStore, ["gAttention"]),
+    ...mapMutations(houseStore, ["CLEAR_CHECKED", "CLEAR_USERHOUSE_LIST"]),
+    ...mapActions(houseStore, ["gAttention", "getUserHouseList"]),
     selectHouse() {
       //this.detailHouse(this.apt);
       eventBus.$emit("showDetail", false);
@@ -114,7 +114,9 @@ export default {
             (response) => {
               console.log(response.data);
               this.CLEAR_CHECKED();
+              this.CLEAR_USERHOUSE_LIST();
               this.gAttention(params);
+              this.getUserHouseList(params);
             },
             (error) => {
               console.log(error);
