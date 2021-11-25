@@ -7,6 +7,8 @@ import {
   getTotal,
   getAttention,
   getCnt,
+  userHouseInfoList,
+  getAlist,
 } from "@/api/house.js";
 import { eventBus } from "../../main.js";
 
@@ -26,9 +28,12 @@ const houseStore = {
 
     attentions: {},
     checked: [],
+    checks: [],
 
     setdong: null,
     setword: null,
+
+    userhouse: [],
   },
 
   getters: {},
@@ -84,9 +89,16 @@ const houseStore = {
     CLEAR_DONG_LIST: (state) => {
       state.dongs = [{ value: null, text: "선택하세요" }];
     },
+    SET_USERHOUSE_LIST: (state, list) => {
+      state.userhouse = list;
+      eventBus.$emit("markerMapA", list);
+    },
+    CLEAR_USERHOUSE_LIST: (state) => {
+      state.userhouse = [];
+    },
     SET_APT_LIST: (state, apts) => {
       state.apts = apts;
-      eventBus.$emit("markerMap", apts);
+      eventBus.$emit("markerMapB", apts);
     },
     SET_HOUSE_LIST: (state, houses) => {
       //   console.log(houses);
@@ -107,6 +119,14 @@ const houseStore = {
       checks.forEach((check) => {
         state.checked.push(check.aptCode);
       });
+    },
+
+    SET_A_LIST: (state, check) => {
+      state.checks = check;
+    },
+
+    CLEAR_A_LIST: (state) => {
+      state.checks = [];
     },
     CLEAR_APT_LIST: (state) => {
       state.apts = [];
@@ -247,6 +267,36 @@ const houseStore = {
         param,
         ({ data }) => {
           commit("SET_CNT_ATTENTION", data);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    },
+
+    getUserHouseList: ({ commit }, data) => {
+      let param = {
+        id: data.id,
+      };
+      userHouseInfoList(
+        param,
+        ({ data }) => {
+          commit("SET_USERHOUSE_LIST", data);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    },
+
+    getAttentionList: ({ commit }, data) => {
+      let param = {
+        id: data.id,
+      };
+      getAlist(
+        param,
+        ({ data }) => {
+          commit("SET_A_LIST", data);
         },
         (error) => {
           console.log(error);

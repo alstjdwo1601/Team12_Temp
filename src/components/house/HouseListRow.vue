@@ -37,10 +37,11 @@ export default {
   },
   props: {
     apt: Object,
+    pg: Number,
   },
   created() {
     if (this.isLogin) {
-      if (this.checked.includes(this.apt.aptCode)) {
+      if (this.checks.includes(this.apt.aptCode)) {
         this.flag = true;
       } else {
         this.flag = false;
@@ -53,7 +54,7 @@ export default {
   watch: {
     apt() {
       if (this.isLogin) {
-        if (this.checked.includes(this.apt.aptCode)) {
+        if (this.checks.includes(this.apt.aptCode)) {
           this.flag = true;
         } else {
           this.flag = false;
@@ -64,7 +65,7 @@ export default {
     },
   },
   computed: {
-    ...mapState(houseStore, ["checked"]),
+    ...mapState(houseStore, ["checks"]),
     ...mapState(memberStore, ["isLogin", "userInfo"]),
   },
   methods: {

@@ -17,6 +17,7 @@
       :key="index"
       :check="check"
       :pg="pg"
+      :index="index"
     />
     <br />
     <b-button-toolbar
@@ -67,6 +68,7 @@
 <script>
 import HouseAListRow from "@/components/house/HouseAListRow.vue";
 import { mapActions, mapState, mapMutations } from "vuex";
+import { eventBus } from "../../main.js";
 
 const houseStore = "houseStore";
 const memberStore = "memberStore";
@@ -94,11 +96,13 @@ export default {
         id: this.userInfo.userid,
       };
       this.gTotal(params);
+
+      eventBus.$emit("markerMapA", this.userhouse);
     }
   },
   computed: {
     ...mapState(memberStore, ["isLogin", "userInfo"]),
-    ...mapState(houseStore, ["checked", "atotal"]),
+    ...mapState(houseStore, ["checked", "atotal", "userhouse"]),
     totalCnt() {
       let listLeng = this.atotal,
         listSize = 5,
@@ -111,8 +115,8 @@ export default {
     // },
   },
   methods: {
-    ...mapMutations(houseStore, ["CLEAR_CHECKED"]),
-    ...mapActions(houseStore, ["gAttention", "gTotal"]),
+    ...mapMutations(houseStore, ["CLEAR_CHECKED", "CLEAR_USERHOUSE_LIST"]),
+    ...mapActions(houseStore, ["gAttention", "gTotal", "getUserHouseList"]),
     firstPg() {
       this.pg = 1;
       this.chagePg(this.pg);

@@ -13,12 +13,11 @@ export default {
   created() {
     this.CLEAR_APT_LIST();
     if (this.isLogin) {
-      this.CLEAR_CHECKED();
+      this.CLEAR_A_LIST();
       let params = {
-        pg: 1,
         id: this.userInfo.userid,
       };
-      this.gAttention(params);
+      this.getAttentionList(params);
 
       let param = {
         word: this.setword,
@@ -33,12 +32,12 @@ export default {
   },
   methods: {
     ...mapMutations(houseStore, [
-      "CLEAR_CHECKED",
+      "CLEAR_A_LIST",
       "CLEAR_APT_LIST",
       "CLEAR_WORD",
       "CLEAR_DONG",
     ]),
-    ...mapActions(houseStore, ["gAttention", "cntTotal"]),
+    ...mapActions(houseStore, ["getAttentionList", "cntTotal"]),
   },
 };
 </script>

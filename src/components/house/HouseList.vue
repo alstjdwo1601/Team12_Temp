@@ -1,7 +1,12 @@
 <template>
   <b-container v-if="apts && apts.length != 0" class="bv-example-row mt-3">
     <hr />
-    <house-list-row v-for="(apt, index) in apts" :key="index" :apt="apt" />
+    <house-list-row
+      v-for="(apt, index) in apts"
+      :key="index"
+      :apt="apt"
+      :pg="pg"
+    />
     <b-button-toolbar
       class="mb-5"
       key-nav

@@ -34,6 +34,10 @@ function delAttention(params, success, fail) {
   api.delete(`/map/del`, { params: params }).then(success).catch(fail);
 }
 
+function userHouseInfoList(params, success, fail) {
+  api.get(`/map/info`, { params: params }).then(success).catch(fail);
+}
+
 //aptcode 갯수
 function getCnt(params, success, fail) {
   api.get(`/map/cnt`, { params: params }).then(success).catch(fail);
@@ -42,6 +46,10 @@ function getCnt(params, success, fail) {
 //aptcode로 비교해서 houseinfo 뽑기
 function getHouseInfo(params, success, fail) {
   api.get(`/map/house`, { params: params }).then(success).catch(fail);
+}
+
+function getAlist(params, success, fail) {
+  api.get(`/map/alist`, { params: params }).then(success).catch(fail);
 }
 export {
   sidoList,
@@ -55,4 +63,6 @@ export {
   delAttention,
   getCnt,
   getHouseInfo,
+  userHouseInfoList,
+  getAlist,
 };

@@ -13,8 +13,17 @@
         switch
       ></b-form-checkbox>
     </b-col>
-    <b-col cols="10" class="align-self-center">
+    <b-col cols="7" class="align-self-center">
       [{{ attention.aptCode }}] {{ attention.aptName }}
+    </b-col>
+    <b-col>
+      <b-button
+        variant="outline-primary"
+        style="float: right"
+        @click="setStart(userhouse, index + (pg - 1) * 5)"
+      >
+        출발지
+      </b-button>
     </b-col>
   </b-row>
 </template>
@@ -34,11 +43,14 @@ export default {
       isColor: false,
       flag: true,
       attention: {},
+
+      //계산 함수
     };
   },
   props: {
     check: Number,
     pg: Number,
+    index: Number,
   },
   created() {
     let param = {
@@ -56,6 +68,7 @@ export default {
   },
   computed: {
     ...mapState(memberStore, ["isLogin", "userInfo"]),
+    ...mapState(houseStore, ["userhouse"]),
   },
   methods: {
     ...mapMutations(houseStore, ["CLEAR_CHECKED"]),
@@ -112,6 +125,11 @@ export default {
         alert("로그인 후 이용해주세요.");
         this.flag = false;
       }
+    },
+
+    //시작
+    setStart(result, start) {
+      eventBus.$emit("dijikstra", result, start);
     },
   },
 };
