@@ -21,6 +21,10 @@ export default {
         text: "Apart",
         href: "/house",
       },
+      {
+        text: "Instagram",
+        href: "/instagram",
+      },
     ],
   },
   getters: {
