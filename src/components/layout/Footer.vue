@@ -1,8 +1,5 @@
 <template>
   <div>
-    <br />
-    <br />
-
     <v-footer color="warning lighten-1">
       <v-card flat tile class="warning lighten-1 white--text text-center">
         <v-card-text>
