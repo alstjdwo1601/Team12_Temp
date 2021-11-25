@@ -129,6 +129,7 @@ export default {
 
     //시작
     setStart(result, start) {
+      console.log("start");
       eventBus.$emit("dijikstra", result, start);
     },
   },

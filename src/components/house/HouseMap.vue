@@ -140,6 +140,7 @@ export default {
     },
 
     gethousedistance(result, start) {
+      console.log(result);
       this.removelineMarker();
       var length = result.length;
       var distance = new Array(length);

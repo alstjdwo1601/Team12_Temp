@@ -68,7 +68,6 @@
 <script>
 import HouseAListRow from "@/components/house/HouseAListRow.vue";
 import { mapActions, mapState, mapMutations } from "vuex";
-import { eventBus } from "../../main.js";
 
 const houseStore = "houseStore";
 const memberStore = "memberStore";
@@ -96,8 +95,8 @@ export default {
         id: this.userInfo.userid,
       };
       this.gTotal(params);
-
-      eventBus.$emit("markerMapA", this.userhouse);
+      this.getUserHouseList(params);
+      this.getAttentionList(params);
     }
   },
   computed: {
@@ -116,7 +115,12 @@ export default {
   },
   methods: {
     ...mapMutations(houseStore, ["CLEAR_CHECKED", "CLEAR_USERHOUSE_LIST"]),
-    ...mapActions(houseStore, ["gAttention", "gTotal", "getUserHouseList"]),
+    ...mapActions(houseStore, [
+      "gAttention",
+      "gTotal",
+      "getUserHouseList",
+      "getAttentionList",
+    ]),
     firstPg() {
       this.pg = 1;
       this.chagePg(this.pg);

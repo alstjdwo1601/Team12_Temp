@@ -91,6 +91,7 @@ const houseStore = {
     },
     SET_USERHOUSE_LIST: (state, list) => {
       state.userhouse = list;
+      console.log(list);
       eventBus.$emit("markerMapA", list);
     },
     CLEAR_USERHOUSE_LIST: (state) => {

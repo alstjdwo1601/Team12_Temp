@@ -28,7 +28,13 @@ export default {
   },
   computed: {
     ...mapState(memberStore, ["isLogin", "userInfo"]),
-    ...mapState(houseStore, ["setdong", "setword", "checked", "total"]),
+    ...mapState(houseStore, [
+      "setdong",
+      "setword",
+      "checked",
+      "total",
+      "userhouse",
+    ]),
   },
   methods: {
     ...mapMutations(houseStore, [
@@ -37,7 +43,11 @@ export default {
       "CLEAR_WORD",
       "CLEAR_DONG",
     ]),
-    ...mapActions(houseStore, ["getAttentionList", "cntTotal"]),
+    ...mapActions(houseStore, [
+      "getAttentionList",
+      "getUserHouseList",
+      "cntTotal",
+    ]),
   },
 };
 </script>
