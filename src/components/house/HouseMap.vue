@@ -44,7 +44,7 @@ export default {
       /* global kakao */
       script.onload = () => kakao.maps.load(this.initMap);
       script.src =
-        "http://dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=1f36115e847878579a1c20a59f5516e3&libraries";
+        "http://dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=1f36115e847878579a1c20a59f5516e3&libraries=services";
       document.head.appendChild(script);
     }
     eventBus.$on("markerMap", (data) => {
