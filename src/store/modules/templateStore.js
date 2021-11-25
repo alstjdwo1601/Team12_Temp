@@ -18,7 +18,7 @@ export default {
         href: "/board/list",
       },
       {
-        text: "Apart",
+        text: "House",
         href: "/house",
       },
     ],

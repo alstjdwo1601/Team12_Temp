@@ -1,37 +1,19 @@
 <template>
   <div>
-    <br />
-    <v-card class="mx-auto" max-width="1024">
-      <v-img
-        class="white--text align-end"
-        height="600px"
-        src="@/assets/main.jpg"
+    <v-app id="inspire">
+      <v-parallax
+        height="1100"
+        dark
+        src="https://cdn.vuetifyjs.com/images/parallax/material2.jpg"
       >
-        <v-card-title></v-card-title>
-      </v-img>
-
-      <v-card-text class="text--primary"> </v-card-text>
-    </v-card>
-
-    <hr />
-
-    <!--hover-->
-    <v-container class="pa-4 text-center">
-      <v-row class="fill-height" align="center" justify="center">
-        <template v-for="(item, i) in items">
-          <v-col :key="i" cols="12" md="4">
-            <v-hover v-slot="{ hover }">
-              <v-card
-                :elevation="hover ? 12 : 2"
-                :class="{ 'on-hover': hover }"
-              >
-                <v-img :src="item.img" height="225px"> </v-img>
-              </v-card>
-            </v-hover>
+        <v-row align="center" justify="center">
+          <v-col class="text-center" cols="12">
+            <h1 class="text-h4 font-weight-thin mb-6">Happy House</h1>
+            <h4 class="subheading">Find the house you want</h4>
           </v-col>
-        </template>
-      </v-row>
-    </v-container>
+        </v-row>
+      </v-parallax>
+    </v-app>
   </div>
 </template>
 
@@ -58,16 +40,4 @@ export default {
 };
 </script>
 
-<style scoped>
-.v-card {
-  transition: opacity 0.4s ease-in-out;
-}
-
-.v-card:not(.on-hover) {
-  opacity: 0.6;
-}
-
-.show-btns {
-  color: rgba(255, 255, 255, 1) !important;
-}
-</style>
+<style scoped></style>
