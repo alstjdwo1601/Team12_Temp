@@ -3,10 +3,11 @@
     <h2>
       <img
         class="white--text align-end"
-        height="50px"
+        height="35px"
         src="@/assets/placeholder.png"
-      />&nbsp;&nbsp;&nbsp;<b><u>현재 페이지 아파트 위치</u></b>
+      />&nbsp;&nbsp;&nbsp;<b>최단 동선 추천</b>
     </h2>
+    <br />
     <div class="mb-5" id="map" style="width: 100%; height: 500px"></div>
   </div>
 </template>
