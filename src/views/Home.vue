@@ -1,9 +1,6 @@
 <template>
   <div>
-    <b-container class="bv-example-row mt-3">
-      <b-row> </b-row>
-    </b-container>
-    <hr />
+    <br />
     <v-card class="mx-auto" max-width="1024">
       <v-img
         class="white--text align-end"
